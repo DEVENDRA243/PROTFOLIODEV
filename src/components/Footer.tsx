@@ -36,20 +36,19 @@ const Footer: React.FC = () => {
   return (
     <footer className="relative bg-bg pt-4 md:pt-6 pb-12 overflow-hidden">
       {/* Background Robot Component */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-[-40px] z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden flex items-center justify-center">
+        <div className="absolute inset-0 z-0">
           <InteractiveRobotSpline
             scene={ROBOT_SCENE_URL}
-            className="w-full h-full scale-110 md:scale-100" 
+            className="w-full h-full scale-[1.15] md:scale-100 origin-center" 
           />
         </div>
-        <div className="absolute inset-0 bg-black/10 z-10" />
-        {/* Protection Layer to prevent clicking on Spline logo but allow robot interaction */}
-        <div className="absolute bottom-0 right-0 w-40 h-10 bg-bg z-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
+        {/* Protection Layer to hide Spline logo */}
+        <div className="absolute bottom-0 right-0 w-[150px] h-[50px] bg-bg z-20" />
       </div>
 
       <div className="relative z-10">
-        {/* Tech Stack Loop */}
         {/* Tech Stack Loop */}
         <div className="mb-16 md:mb-20 overflow-hidden border-y border-white/5 py-4 transform-gpu">
           <LogoLoop
@@ -67,12 +66,12 @@ const Footer: React.FC = () => {
         </div>
 
         {/* CTA */}
-        <div className="max-w-[1200px] mx-auto px-6 text-center mb-16 md:mb-20">
+        <div className="max-w-[1200px] mx-auto px-6 flex flex-col items-center text-center mb-16 md:mb-20">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl lg:text-7xl font-display mb-12"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display mb-8 md:mb-12"
           >
             Have an idea? <br />
             <span className="italic">Let's build it.</span>
@@ -80,7 +79,7 @@ const Footer: React.FC = () => {
 
           <a 
             href="mailto:devenjsr@gmail.com"
-            className="group relative inline-flex items-center gap-4 px-10 py-5 rounded-full border border-stroke text-lg hover:border-transparent transition-all duration-300"
+            className="group relative inline-flex items-center gap-4 px-6 py-3 sm:px-10 sm:py-5 rounded-full border border-stroke text-base sm:text-lg hover:border-transparent transition-all duration-300"
           >
             <span className="relative z-10">Get in touch</span>
             <span className="relative z-10 text-xl">↗</span>
