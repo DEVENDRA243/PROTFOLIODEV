@@ -1,5 +1,5 @@
-import React from 'react';
-import { TechStackComponent } from './ui/tech-stack';
+import CyberSkillCard from './ui/cyber-skill-card';
+import RotatingText from './ui/RotatingText';
 
 const coreLanguagesStack = [
   { name: 'Java', url: '#', color: '#f89820' },
@@ -35,24 +35,36 @@ const devopsStack = [
 
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="py-12 relative overflow-hidden bg-bg">
+    <section id="skills" className="pt-24 pb-4 relative overflow-hidden bg-bg">
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 w-full">
-        <div className="mb-10">
-          <h2 className="text-4xl md:text-5xl font-mono font-bold text-text uppercase tracking-wider mb-4">
-            Technical <span className="text-accent text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Stacks</span>
+        <div className="mb-20 text-center">
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-text uppercase tracking-tight mb-4 italic flex flex-wrap justify-center items-center gap-x-4">
+            TECHNICAL 
+            <RotatingText
+              texts={['POWER', 'STACK', 'TOOLS', 'SKILLS']}
+              mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+              staggerFrom={"last"}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
           </h2>
-          <div className="w-full h-[1px] bg-border relative">
-            <div className="absolute left-0 top-0 h-full w-24 bg-accent/50" />
-          </div>
+          <p className="text-muted text-lg max-w-2xl mx-auto">
+            A specialized collection of modern technologies and tools I use to build high-performance applications.
+          </p>
         </div>
 
         {/* The Grid mapping the new Tech Stack cards */}
-        <div className="flex flex-wrap gap-8 justify-center py-10 w-full">
-          <TechStackComponent title="Frontend Engineering" techStack={frontendStack} />
-          <TechStackComponent title="Core Languages" techStack={coreLanguagesStack} />
-          <TechStackComponent title="Backend Engineering" techStack={backendStack} />
-          <TechStackComponent title="Databases" techStack={databaseStack} />
-          <TechStackComponent title="DevOps & Tools" techStack={devopsStack} />
+        <div className="flex flex-wrap gap-10 justify-center pt-10 pb-0 w-full">
+          <CyberSkillCard title="Frontend" techStack={frontendStack} />
+          <CyberSkillCard title="Core" techStack={coreLanguagesStack} />
+          <CyberSkillCard title="Backend" techStack={backendStack} />
+          <CyberSkillCard title="Databases" techStack={databaseStack} />
+          <CyberSkillCard title="DevOps" techStack={devopsStack} />
         </div>
       </div>
     </section>

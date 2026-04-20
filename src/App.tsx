@@ -10,6 +10,7 @@ const Quote = lazy(() => import('./components/Quote'));
 const Skills = lazy(() => import('./components/Skills'));
 const Footer = lazy(() => import('./components/Footer'));
 const Terminal = lazy(() => import('./components/Terminal'));
+const SplashCursor = lazy(() => import('./components/ui/SplashCursor'));
 import TerminalButton from './components/TerminalButton';
 
 const App: React.FC = () => {
@@ -30,6 +31,11 @@ const App: React.FC = () => {
       <AnimatePresence mode="wait">
         {isLoading && (
           <LoadingScreen onComplete={() => setIsLoading(false)} />
+        )}
+        {!isLoading && (
+          <Suspense fallback={null}>
+            <SplashCursor />
+          </Suspense>
         )}
       </AnimatePresence>
 

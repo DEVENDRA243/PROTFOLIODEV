@@ -1,29 +1,40 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
+import { LogoLoop } from './ui/LogoLoop';
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiTailwindcss, 
+  SiNodedotjs, 
+  SiPostgresql, 
+  SiPython, 
+  SiJavascript, 
+  SiFramer, 
+  SiVite 
+} from 'react-icons/si';
 import { InteractiveRobotSpline } from './ui/interactive-3d-robot';
 
 const Footer: React.FC = () => {
-  const marqueeRef = useRef<HTMLDivElement>(null);
   const ROBOT_SCENE_URL = "https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode";
 
-  useEffect(() => {
-    // GSAP Marquee
-    const marquee = marqueeRef.current;
-    if (marquee) {
-      gsap.to(marquee, {
-        xPercent: -50,
-        repeat: -1,
-        duration: 40,
-        ease: "none",
-      });
-    }
-  }, []);
+  const techLogos = [
+    { node: <SiReact />, title: "React" },
+    { node: <SiNextdotjs />, title: "Next.js" },
+    { node: <SiTypescript />, title: "TypeScript" },
+    { node: <SiTailwindcss />, title: "Tailwind CSS" },
+    { node: <SiNodedotjs />, title: "Node.js" },
+    { node: <SiPostgresql />, title: "PostgreSQL" },
+    { node: <SiPython />, title: "Python" },
+    { node: <SiJavascript />, title: "JavaScript" },
+    { node: <SiFramer />, title: "Framer Motion" },
+    { node: <SiVite />, title: "Vite" },
+  ];
 
 
 
   return (
-    <footer className="relative bg-bg pt-12 md:pt-16 pb-12 overflow-hidden">
+    <footer className="relative bg-bg pt-4 md:pt-6 pb-12 overflow-hidden">
       {/* Background Robot Component */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-[-40px] z-0">
@@ -38,19 +49,25 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        {/* GSAP Marquee */}
-        <div className="mb-24 md:mb-32 pointer-events-none select-none overflow-hidden border-y border-white/5 py-8 transform-gpu">
-          <div ref={marqueeRef} className="flex whitespace-nowrap will-change-transform">
-            {[...Array(10)].map((_, i) => (
-              <span key={i} className="text-6xl md:text-8xl lg:text-[12rem] font-display italic text-white/5 uppercase flex items-center">
-                BUILDING THE FUTURE <span className="mx-8 md:mx-16">•</span>
-              </span>
-            ))}
-          </div>
+        {/* Tech Stack Loop */}
+        {/* Tech Stack Loop */}
+        <div className="mb-16 md:mb-20 overflow-hidden border-y border-white/5 py-4 transform-gpu">
+          <LogoLoop
+            logos={techLogos}
+            speed={60}
+            direction="left"
+            logoHeight={64}
+            gap={80}
+            hoverSpeed={10}
+            fadeOut
+            fadeOutColor="transparent"
+            ariaLabel="Technology stack"
+            className="text-white/20"
+          />
         </div>
 
         {/* CTA */}
-        <div className="max-w-[1200px] mx-auto px-6 text-center mb-24 md:mb-32">
+        <div className="max-w-[1200px] mx-auto px-6 text-center mb-16 md:mb-20">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

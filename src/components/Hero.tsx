@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { SplineScene } from "@/components/ui/splite";
 import { Spotlight } from "@/components/ui/spotlight";
+import RotatingText from './ui/RotatingText';
 
 const roles = ["Creative", "Fullstack", "Founder", "Scholar"];
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
-  const [roleIndex, setRoleIndex] = useState(0);
   const [showSpline, setShowSpline] = useState(false);
   const ROBOT_SCENE_URL = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
@@ -35,13 +35,7 @@ const Hero: React.FC = () => {
       stagger: 0.1
     }, "-=0.8");
 
-    // Role Cycling
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 2000);
-
     return () => {
-      clearInterval(interval);
       clearTimeout(splineTimer);
     };
   }, []);
@@ -85,19 +79,19 @@ const Hero: React.FC = () => {
 
         <div className="mb-8 h-8 flex items-center justify-center gap-2 text-lg md:text-xl font-light text-muted">
           <span>A</span>
-          <div className="relative w-28 md:w-32 inline-block">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={roles[roleIndex]}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="absolute left-0 right-0 font-display italic text-text-primary"
-              >
-                {roles[roleIndex]}
-              </motion.span>
-            </AnimatePresence>
+          <div className="relative inline-flex items-center">
+             <RotatingText
+              texts={roles}
+              mainClassName="font-display italic text-text-primary overflow-hidden"
+              staggerFrom={"first"}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
           </div>
           <span>architecting for the next generation.</span>
         </div>
