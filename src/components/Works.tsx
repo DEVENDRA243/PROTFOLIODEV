@@ -32,6 +32,13 @@ const projects: CardStackItem[] = [
     imageSrc: "/AI_FINANCE.png",
     href: "https://finance--management.streamlit.app/",
   },
+  {
+    id: 5,
+    title: "Laptop Price Prediction",
+    description: "AI-Powered Spec & Hardware Valuation Engine",
+    imageSrc: "/LP_PREDICT.jpg",
+    href: "https://laptoppricepredictss.streamlit.app/",
+  },
 ];
 
 const Works: React.FC = () => {

@@ -32,6 +32,7 @@ Welcome, Guest! Type help to see available commands.` },
     { name: 'Ocean-Odyssey', url: 'https://ocean-live.vercel.app/', desc: 'Interactive Ocean Exploration' },
     { name: 'Malware-AI', url: 'https://malware-classification.onrender.com/', desc: 'AI Malware Classification System' },
     { name: 'Finance-Advisor', url: 'https://finance--management.streamlit.app/', desc: 'AI Financial Management Tool' },
+    { name: 'Laptop-Predictor', url: 'https://laptoppricepredictss.streamlit.app/', desc: 'Laptop Price Prediction Engine' },
   ];
 
   const commands = {

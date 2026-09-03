@@ -37,15 +37,12 @@ const Footer: React.FC = () => {
     <footer className="relative bg-bg pt-4 md:pt-6 pb-12 overflow-hidden">
       {/* Background Robot Component */}
       <div className="absolute inset-0 z-0 overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute w-full h-[120%] -bottom-[10%] left-0 z-0">
           <InteractiveRobotSpline
             scene={ROBOT_SCENE_URL}
             className="w-full h-full scale-[1.15] md:scale-100 origin-center" 
           />
         </div>
-        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
-        {/* Protection Layer to hide Spline logo */}
-        <div className="absolute bottom-0 right-0 w-[150px] h-[50px] bg-bg z-20" />
       </div>
 
       <div className="relative z-10">
