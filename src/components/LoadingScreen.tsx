@@ -5,13 +5,13 @@ interface LoadingScreenProps {
   onComplete: () => void;
 }
 
-const words = ["Design", "Create", "Inspire"];
+const words = ["Architect", "Engineer", "Deploy"];
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const [count, setCount] = useState(0);
   const [wordIndex, setWordIndex] = useState(0);
   const startTimeRef = useRef<number | null>(null);
-  const duration = 2700; // 2700ms total
+  const duration = 1800; // Snappy 1.8s load
 
   useEffect(() => {
     const animate = (currentTime: number) => {
@@ -24,7 +24,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
       if (progress < 1) {
         requestAnimationFrame(animate);
       } else {
-        setTimeout(onComplete, 400);
+        setTimeout(onComplete, 250);
       }
     };
 
@@ -32,7 +32,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
     const wordInterval = setInterval(() => {
       setWordIndex((prev) => (prev + 1) % words.length);
-    }, 900);
+    }, 600);
 
     return () => {
       cancelAnimationFrame(animationId);
@@ -42,45 +42,48 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
   return (
     <motion.div 
-      className="fixed inset-0 z-[9999] bg-bg flex flex-col justify-between p-8 md:p-16"
+      className="fixed inset-0 z-[9999] bg-[#ebebea] text-[#111111] flex flex-col justify-between p-6 md:p-12"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
     >
-      <motion.div 
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-xs text-muted uppercase tracking-[0.3em]"
-      >
-        Portfolio
-      </motion.div>
+      <div className="flex items-center justify-between border-b-2 border-[#111111] pb-4">
+        <div className="inline-flex items-center gap-2 bg-[#5fb57a] text-[#111111] border-2 border-[#111111] rounded-full px-3 py-0.5 font-display text-xs font-black uppercase tracking-wider">
+          DK // 2026
+        </div>
+        <div className="font-mono text-xs font-bold uppercase tracking-widest text-[#555555]">
+          DEVENDRA KUMAR PORTFOLIO
+        </div>
+      </div>
 
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex flex-col items-center justify-center text-center">
+        <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#555555] mb-2">
+          Initializing Engine
+        </span>
         <AnimatePresence mode="wait">
           <motion.h1
             key={words[wordIndex]}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="text-4xl md:text-6xl lg:text-7xl font-display italic text-text-primary/80"
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="text-5xl sm:text-7xl md:text-8xl font-display font-black uppercase text-[#111111]"
           >
             {words[wordIndex]}
           </motion.h1>
         </AnimatePresence>
       </div>
 
-      <div className="flex flex-col items-end gap-4">
-        <div className="text-6xl md:text-8xl lg:text-9xl font-display text-text-primary tabular-nums">
-          {String(count).padStart(3, "0")}
-        </div>
-        
-        <div className="w-full max-w-xs h-[3px] bg-stroke/50 relative overflow-hidden">
+      <div className="border-t-2 border-[#111111] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="w-full sm:max-w-md h-5 bg-white border-2 border-[#111111] rounded-full overflow-hidden p-0.5 shadow-[2px_2px_0px_#111111]">
           <motion.div 
-            className="absolute top-0 left-0 h-full accent-gradient"
-            style={{ width: '100%', scaleX: count / 100, transformOrigin: 'left', boxShadow: '0 0 8px rgba(137, 170, 204, 0.35)' }}
+            className="h-full bg-[#5fb57a] rounded-full"
+            style={{ width: `${count}%`, transition: 'width 0.1s linear' }}
           />
+        </div>
+
+        <div className="font-display text-3xl md:text-5xl font-black text-[#111111] tabular-nums">
+          {String(count).padStart(3, "0")}%
         </div>
       </div>
     </motion.div>

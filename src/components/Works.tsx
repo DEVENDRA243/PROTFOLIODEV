@@ -1,100 +1,109 @@
-import { motion } from 'framer-motion';
-import RotatingText from './ui/RotatingText';
+import React from 'react';
 import ProjectCard from './ui/ProjectCard';
-import type { CardStackItem } from '../types/projects';
+import PerspectiveRoomBox from './ui/perspective-room-box';
 
-const projects: CardStackItem[] = [
+interface ProjectItem {
+  id: number;
+  indexTag: string;
+  title: string;
+  category: string;
+  description: string;
+  imageSrc: string;
+  fallbackImage: string;
+  tags: string[];
+  href: string;
+}
+
+const projects: ProjectItem[] = [
   {
     id: 1,
+    indexTag: "01",
     title: "Family Hub",
-    description: "Smart Family Healthcare Hub",
+    category: "HealthTech / Full-Stack",
+    description: "Centralized smart healthcare and vitals management platform designed for families and clinical records.",
     imageSrc: "/HUB.png",
+    fallbackImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80",
+    tags: ["React", "Node.js", "Express", "MongoDB"],
     href: "https://family-health-hub-navy.vercel.app/login",
   },
   {
     id: 2,
+    indexTag: "02",
     title: "Ocean Odyssey",
-    description: "Marine Exploration Platform",
+    category: "Interactive 3D / WebGL",
+    description: "Immersive marine conservation and aquatic exploration platform featuring real-time 3D shaders and fluid physics.",
     imageSrc: "/OCEAN.png",
+    fallbackImage: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&auto=format&fit=crop&q=80",
+    tags: ["Three.js", "React", "WebGL", "Framer Motion"],
     href: "https://ocean-live.vercel.app/",
   },
   {
     id: 3,
-    title: "AI Malware Classification",
-    description: "Intelligent Malware Analysis System",
+    indexTag: "03",
+    title: "AI Malware Guard",
+    category: "Cybersecurity / Deep Learning",
+    description: "Deep learning malware detection engine classifying byte-sequence anomalies and malicious execution fingerprints.",
     imageSrc: "/classification_OG.webp",
+    fallbackImage: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80",
+    tags: ["Python", "PyTorch", "FastAPI", "Cybersecurity"],
     href: "https://malware-classification.onrender.com/",
   },
   {
     id: 4,
+    indexTag: "04",
     title: "AI Finance Advisor",
-    description: "Smarter Decisions, Better Returns",
+    category: "Fintech / Predictive Analytics",
+    description: "Intelligent portfolio optimization and return analytics powered by machine learning algorithms.",
     imageSrc: "/AI_FINANCE.png",
+    fallbackImage: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=80",
+    tags: ["Streamlit", "Python", "Data Science", "Pandas"],
     href: "https://finance--management.streamlit.app/",
   },
   {
     id: 5,
-    title: "Laptop Price Prediction",
-    description: "AI-Powered Spec & Hardware Valuation Engine",
+    indexTag: "05",
+    title: "Hardware Price Engine",
+    category: "Valuation & Regression ML",
+    description: "Algorithmic hardware valuation engine predicting market prices across global computer component specifications.",
     imageSrc: "/LP_PREDICT.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&auto=format&fit=crop&q=80",
+    tags: ["Python", "Scikit-Learn", "Regression", "UI"],
     href: "https://laptoppricepredictss.streamlit.app/",
   },
 ];
 
 const Works: React.FC = () => {
   return (
-    <section id="work" className="bg-bg py-12 md:py-16 px-6 md:px-10 lg:px-16 overflow-hidden transform-gpu will-change-transform">
-      <div className="max-w-[1200px] mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-          className="mb-8 md:mb-12"
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-8 h-px bg-stroke" />
-            <span className="text-xs text-muted uppercase tracking-[0.3em]">Selected Work</span>
-          </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h2 className="text-4xl md:text-6xl font-display mb-4 flex items-center gap-3">
-                Featured 
-                <RotatingText
-                  texts={['projects', 'solutions', 'products', 'identities']}
-                  mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-                  staggerFrom={"last"}
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  exit={{ y: "-120%" }}
-                  staggerDuration={0.025}
-                  splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                  rotationInterval={2000}
-                />
-              </h2>
-              <p className="text-muted text-sm md:text-base max-w-sm">
-                A selection of projects I've worked on, from concept to launch.
-              </p>
+    <section id="work" className="bg-[#ebebea] text-[#111111] py-16 md:py-24 px-4 md:px-8 border-t-2 border-[#111111] relative overflow-hidden">
+      {/* 3D Perspective Room Box Background */}
+      <PerspectiveRoomBox opacity={0.13} />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16 pb-8 border-b-2 border-[#111111]">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-white border-2 border-[#111111] rounded-full px-3 py-1 mb-4 shadow-[2px_2px_0px_#111111]">
+              <span className="w-2 h-2 rounded-full bg-[#5fb57a]" />
+              <span className="font-display text-xs font-black uppercase tracking-wider text-[#111111]">
+                Catalog // 02
+              </span>
             </div>
-
-
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#111111]">
+              SELECTED <span className="text-[#5fb57a] underline decoration-[#111111] decoration-4">WORKS</span>
+            </h2>
           </div>
-        </motion.div>
 
-        {/* Modern Project Grid */}
-        <div className="flex flex-wrap gap-10 justify-center mt-12 w-full">
+          <div className="max-w-md">
+            <p className="font-sans text-sm md:text-base font-medium text-[#444444] leading-relaxed">
+              Production web applications, full-stack microservices, and machine learning pipelines architected with scalability, speed, and precision.
+            </p>
+          </div>
+        </div>
+
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
           {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <ProjectCard {...project} />
-            </motion.div>
+            <ProjectCard key={project.id} {...project} />
           ))}
         </div>
       </div>
@@ -103,4 +112,3 @@ const Works: React.FC = () => {
 };
 
 export default Works;
-
